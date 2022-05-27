@@ -21,7 +21,7 @@ function generateItems()
     var randomItem = items[Math.floor(Math.random() * 201)]
     document.getElementById("name-" + i).innerHTML = randomItem;
     if (!nonstackable.includes(randomItem)) {
-      let randomCount = Math.floor(Math.random() * 10) + 1;
+      let randomCount = Math.floor(Math.random() * 64) + 1;
       document.getElementById("count-" + i).innerHTML = "[x" + randomCount + "]";
     } else {
        document.getElementById("count-" + i).innerHTML = "";
