@@ -1,151 +1,140 @@
-.container{
-  margin: auto;
-  width: 90%;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 15px;
+.container {
+    margin: auto;
+    width: 90%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
 }
 
 .item {
-/*   background-color: rgb(163, 184, 169); */
-  border-color:rgb(163, 184, 169);
-  border-style:solid;
-  border-radius: 10px;
-  display: flex;
-  transition: .2s;
-  transition-timing-         function: ease-in-out;
-  
- 
+    /*   background-color: rgb(163, 184, 169); */
+    border-color: rgb(163, 184, 169);
+    border-style: solid;
+    border-radius: 10px;
+    display: flex;
+    transition: .2s;
+    transition-timing-function: ease-in-out;
+
+
 }
 
-.item-name
-{
-  font-size: 1.3em;
-  margin-left:.5em;
-  padding:10px;
-  transition: .2s;
-  
- 
+.item-name {
+    font-size: 1.3em;
+    margin-left: .5em;
+    padding: 10px;
+    transition: .2s;
+
+
 }
 
-.item-count
-{
-  font-size: 1.3em;
-  margin-top:2em;
-  margin-left: .5em;
-  padding:10px;
-  position: absolute;
-   transition: .2s;
-  transition-delay: .2s;
+.item-count {
+    font-size: 1.3em;
+    margin-top: 3em;
+    margin-left: .5em;
+    padding: 10px;
+    position: absolute;
+    transition: .2s;
+    transition-delay: .2s;
 }
 
-.item:hover
-{
-  background-color: rgb(91, 148, 186);
+.item:hover {
+    background-color: rgb(91, 148, 186);
     border-radius: 50px;
 }
 
-.item:hover .item-name
-{
-  opacity:0;
-  margin-left:19px;
+.item:hover .item-name {
+    opacity: 0;
+    margin-left: 19px;
 }
 
-.item:hover .item-count
-{
-   opacity:0;
-  margin-left:19px;
+.item:hover .item-count {
+    opacity: 0;
+    margin-left: 19px;
 }
 
-.item:hover .item-ench
-{
-    opacity:1;
+.item:hover .item-ench {
+    opacity: 1;
     margin-left: .8em;
-    display:block;
-}
-.item:hover .item-dura
-{
-    opacity:1;
-    display:block;
-  margin-left: .8em;
+    display: block;
 }
 
-.item-ench
-{
-   font-size: 1.3em;
-
-  margin-left: -.5em;
-  padding:10px;
-  position: absolute;
-   transition: .2s;
-  transition-delay: .1s;
-    opacity: 0;
+.item:hover .item-dura {
+    opacity: 1;
+    display: block;
+    margin-left: .8em;
 }
-.item-dura
-{
- font-size: 1.3em;
-  margin-top:2em;
-  margin-left: -.5em;
-  padding:10px;
-  position: absolute;
-   transition: .2s;
-  transition-delay: .2s;
+
+.item-ench {
+    font-size: 1.3em;
+
+    margin-left: -.5em;
+    padding: 10px;
+    position: absolute;
+    transition: .2s;
+    transition-delay: .1s;
     opacity: 0;
 }
 
-.button-gen
-{
-  font-size: 1.1em;
-  padding: 7px;
-  border: none;
-  background-color: rgb(252, 244, 3);
-  transition: .2s;
-  border-radius: 10px;
+.item-dura {
+    font-size: 1.3em;
+    margin-top: 2em;
+    margin-left: -.5em;
+    padding: 10px;
+    position: absolute;
+    transition: .2s;
+    transition-delay: .2s;
+    opacity: 0;
 }
 
-.button-gen:hover
-{
-  font-size: 1.2em;
-  background-color: rgb(163, 158, 0);
+.button-gen {
+    font-size: 1.1em;
+    padding: 7px;
+    border: none;
+    background-color: rgb(252, 244, 3);
+    transition: .2s;
+    border-radius: 10px;
+}
+
+.button-gen:hover {
+    font-size: 1.2em;
+    background-color: rgb(163, 158, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media only screen and (max-width: 500px) {
-  .container {
-    grid-template-columns: repeat(1, 1fr);
-  }
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 
 h1 {
-   text-align: center;
+    text-align: center;
 }
 
 body {
-   font-family: Helvetica, sans-serif;
- 
+    font-family: Helvetica, sans-serif;
+
 }
 
-.button-copy
-{
-  font-size: 1.1em;
-  height: 2.5em;
-  width: 2.5em;
-  padding: 1px;
-  border: none;
-  background-color: rgb(252, 244, 3);
-  transition: .2s;
-  border-radius: 10px;
-  
+.button-copy {
+    font-size: 1.1em;
+    height: 2.5em;
+    width: 2.5em;
+    padding: 1px;
+    border: none;
+    background-color: rgb(252, 244, 3);
+    transition: .2s;
+    border-radius: 10px;
+
 }
 
-.button-copy:hover
-{
-   font-size: 1.2em;
-  background-color: rgb(163, 158, 0);
+.button-copy:hover {
+    font-size: 1.2em;
+    background-color: rgb(163, 158, 0);
 }

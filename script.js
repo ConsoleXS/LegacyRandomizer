@@ -1,72 +1,471 @@
+/*
+ * TODO: make enchants a class, aim for less + more readable code
+ * Add all armor enchants
+ * Fix horse armors
+ * - 6Times (aka abs)
+ *
+ */
+
+
+window.onload = function() {init()};
+
 document.getElementById("button-gen").onclick = function() {generateItems()};
 
-const items = ["Shield", "Nothing. LLL", "raw chicken", "glowstone", "iron", 'rod', "dirt",
-"sus stew", "netherite", "shirt", "blueice", "lava", "stone axe", "diamond axe", "iron hoe", "turtle hat",
- "cooked salmon", "milk", "flint and steel", "lapis", "wood axe", "splash instant health 2", "diamond hoe", "sand", "steak", 
- "warped fungus", "night vision", "diamond shoes", "raw salmon", "egap", "luck", "melon", "raw cod", "beetroot", "tropical fish", 
- "spider eye","boat", "swift 1", "rotten flesh"," tnt", "diamond", "honey block","obsidian", "iron shovel", "gold", "bucket of pufferfish", 
- "netherite pants", "sandstone", "leather hat", "cobweb", "slow falling", "emerald", "bow", "netherite hoe", "strider", "gap", "splash weakness",
-  "arrow", "bucket", "iron axe", "melon", "gold boots", "diamond hat", "iron door", "parrot", "dried kelp", "ice", "log", "echest", "coal", "wood",
-   "crossbow", "iron shirt", "trident", "horse", "iron sword", "diamond pick", "splash instant health 1", "bread", "gravel", "snow", "snowball", "bed", 
-   "soul sand", "fire res", "golden carrot", "anchor", "chain pants", "sweet berries", "packed ice", "splash instant damage 1", "cooked cod", "iron shoes", 
-   wait;-:t];
 
-
-const enchantments = ["Sharpness", "Protection", "Fire Protection", "Blast Protection", "Aqua Affinity", "Respiration", "Power", "Flame", "Punch",
-"Thorns", "Unbreaking", "Curse of Vanishing", "Curse of Binding"];
-
-const nonstackable = ["Shield", "sus stew", "netherite shirt","lava","stone axe","diamond axe","iron hoe"
-,"turtle hat","milk","flint and steel","wood axe","splash instant health 2","diamond hoe","warped fungus stick",
-"night vision","diamond shoes","luck","boat","swift 1","iron shovel","bucket of pufferfish","netherite pants","leather hat",
-"slowfalling","bow","netherite hoe","strider","splash weakness","bucket" ,"iron axe","gold boots","diamond hat","parrot","crossbow",
-"ironshirt","trident","horse","iron sword","diamond pick","splash instant health 1","bed","fireres","chain pants","splash instant damage 1",
-"iron shoes","diamondshovel","leather shoes","wood shovel","gold hat","chain hat","diamond pants","horse gold","gold leggings","netherite shoes",
-"netherite sword","wolf","splahslow 2","water","raw rabbit","stone pick","chainshirt","iron pants","leather shirt","mule","cooked chicken","pig",
-"shears","swift 2","horse leather","gold axe","stone shovel","honey bottles","rabit stew","water breathing","regen 2","gold sword","regen 1","iron hat",
-"carrot on stick","strength 2","carrot","cake","wood sword","splash poison 2","wood hoe","chain boots","horse diamond","splash instantdamage 2","gold hoe",
-"netherite hat","strength 1","wood pick","splash poison 1","mushroom stew","gold shirt","gold pick","jump 2","gold shovel","stone sword","netherite shovel","leather pants","pufferfish",
-"splash slow","diamond sword","netherite pick","totem","iron pick","netherite axe","diamond shirt","jump 1","splash slow 1","spectral arrow","beetroot stew","stone hoe",
- "splash instant damage 2", "shirt", "splash slow 2", "regen 1"];
-
-const enchantable = ["Shield", "netherite shirt","stone axe","diamond axe","iron hoe","turtle hat","wood axe","diamond hoe","diamond shoes","iron shovel","netherite pants","leather hat","bow","netherite hoe","bucket" ,"iron axe","gold boots","diamond hat","parrot","crossbow","ironshirt","trident","horse","iron sword","diamond pick","chain pants","iron shoes","diamondshovel","leather shoes","wood shovel","gold hat","chain hat","diamond pants","horse gold","gold leggings","netherite shoes","netherite sword","stone pick","chainshirt","iron pants","leather shirt","shears","horse leather","gold axe","stone shovel","gold sword","iron hat","wood sword","wood hoe","chain boots","horse diamond","gold hoe","netherite hat","wood pick","gold shirt","gold pick","gold shovel","stone sword","netherite shovel","leather pants","diamond sword","netherite pick","totem","iron pick","netherite axe","diamond shirt","spectral arrow","stone hoe"];
-
-const durable = ["Shield", "netherite shirt","stone axe","diamond axe","iron hoe","turtle hat","wood axe","diamond hoe","diamond shoes","iron shovel","netherite pants","leather hat","bow","netherite hoe","iron axe","gold boots","diamond hat","parrot","crossbow","ironshirt","trident","horse","iron sword","diamond pick","chain pants","iron shoes","diamondshovel","leather shoes","wood shovel","gold hat","chain hat","diamond pants","horse gold","gold leggings","netherite shoes","netherite sword","stone pick","chainshirt","iron pants","leather shirt","shears","horse leather","gold axe","stone shovel","gold sword","iron hat","wood sword","wood hoe","chain boots","horse diamond","gold hoe","netherite hat","wood pick","gold shirt","gold pick","gold shovel","stone sword","netherite shovel","leather pants","diamond sword","netherite pick","totem","iron pick","netherite axe","diamond shirt","spectral arrow","stone hoe"];
-
-function generateItems()
-{
- 
-  
-  for (i = 1; i<=10; i++)
-  {
-    
-    var randomItem = items[Math.floor(Math.random() * 201)]
-    document.getElementById("name-" + i).innerHTML = randomItem;
-    if (!nonstackable.includes(randomItem)) {
-      let randomCount = Math.floor(Math.random() * 64) + 1;
-      document.getElementById("count-" + i).innerHTML = "[x" + randomCount + "]";
-    } else {
-       document.getElementById("count-" + i).innerHTML = "";
+class item {
+    constructor(maxStack, names) {
+        this.maxStack = maxStack;
+        this.names = names;
     }
-    
-    if (enchantable.includes(randomItem)) {
-       let randomEnch = enchantments[Math.floor(Math.random() * 13)]
-       let level = Math.floor(Math.random() * 3) + 1;
-       document.getElementById("ench-" + i).innerHTML = randomEnch + " " + level;
-    } else {
-      document.getElementById("ench-" + i).innerHTML = "Enchantment N/A";
+
+
+    randomCount() {
+        return Math.floor(Math.random() * this.maxStack) + 1;
     }
+
+
+    randomName() {
+        let index = Math.floor(Math.random() * this.names.length);
+        return index; // index for multi-use
+    }
+
+    random(max) {
+        return Math.floor(Math.random() * max) + 1;
+    }
+
+
+    randomItem() {
+        let nameIdx = this.randomName();
+        let name = this.names[nameIdx];
+        return [name, this.random(this.maxStack), "N/A", "", "N/A"]; // display name, stack, enchant, level, dura
+    }
+}
+
+class armor_tools extends item {
+    constructor(maxStack, duras, enchants, enchMaxes, types, names) { // types: wood, leather, gold, etc. names: shirt, sword, etc.
+        super(maxStack, names);
+        this.duras = duras; // this will be an array of all the duras, separated (colon irrelevant): name1:type1, name1:type2, ...
+        this.enchants = enchants;
+        this.enchMaxes = enchMaxes;
+        this.types = types;
+    }
+
+
+    randomType() {
+        this.typeIndex = Math.floor(Math.random() * this.types.length);
+        return this.typeIndex; // index for multi-use
+
+    }
+
+    randomEnchant() {
+        let index = Math.floor(Math.random() * this.enchants.length);
+        return [this.enchants[index], super.random(this.enchMaxes[index])]; // enchant, lvl
+    }
+
+    randomItem() {
+        let nameIdx = super.randomName();
+        let name = this.names[nameIdx];
+        let enchant = this.randomEnchant();
+        let typeIdx = this.randomType();
+        let type = this.types[typeIdx];
+        let dura = super.random(this.duras[nameIdx * 6 + typeIdx]);
+
+        return [type + " " + name, 1, enchant[0], enchant[0] == "none" ? "" : enchant[1], dura];
+    }
+}
+
+class specialEnchants extends armor_tools {
+    constructor(maxStack, duras, enchants, enchMaxes, types, names) {
+        super(maxStack, duras, enchants, enchMaxes, types, names);
+        this.enchants = enchants;
+        this.enchMaxes = enchMaxes; // this and enchants should be arrays of arrays with enchants for each indiv. type
+    }
+
+    randomEnchant(enchants, enchantMaxes) {
+        let index = Math.floor(Math.random() * enchants.length);
+        return [enchants[index], super.random(enchantMaxes[index])]; // enchant, lvl
+    }
+
+    randomItem() {
+        let nameIdx = super.randomName();
+        let name = this.names[nameIdx];
+        let enchant = this.randomEnchant(this.enchants[nameIdx], this.enchMaxes[nameIdx]);
+        let typeIdx = this.randomType();
+        let type = this.types[typeIdx];
+        let dura = super.random(this.duras[typeIdx]);
+
+        console.log(enchant);
+        console.log(this.enchants[nameIdx]);
+        console.log(this.enchMaxes[nameIdx]);
+        return [type + name, 1, enchant[0], enchant[0] == "none" ? "" : enchant[1], dura];
+    }
+}
+
+class specialStack extends item {
+    constructor(maxStack, names, specialStack, specialNames) {
+        super(maxStack, names);
+        this.specialStack = specialStack;
+        this.specialNames = specialNames;
+    }
+
+    randomItem() {
+        let nameIdx = super.randomName();
+        let name = this.names[nameIdx];
+
+        let specialIdx = this.specialNames.indexOf(name);
+
+        return [name, specialIdx == -1 ? super.random(this.maxStack) : super.random(this.specialStack[specialIdx]), "N/A", "", "N/A"];
+    }
+}
+
+class potions extends item {
+    constructor(maxStack, names) {
+        super(maxStack, names);
+    }
+
+    randomItem() {
+        let rand = super.random(3);
+        return [rand == 1 ? "" : (rand == 2 ? "Splash" : "Lingering") + " Potion" + this.names[super.randomName()], 1, "N/A", "", "N/A"]; // Normal, splash, lingering
+    }
+}
+
+class arrows extends item { // makes it easier to concat one word
+    constructor(maxStack, names) {
+        super(maxStack, names);
+    }
+
+    randomItem() {
+        let nameIdx = super.randomName();
+        let name = this.names[nameIdx];
+        return ["Arrow" + name, super.random(this.maxStack), "N/A", "", "N/A"]; // display name, amount
+    }
+}
+
+let generalEnchants = ["unbreak", "mend", "bind", "vanish"];
+let generalEnchantVals = [3, 1, 1, 1];
+
+let potionNames = [ // 38 total
+    " of Night vision short",
+    " of Night vision long",
+    " of Invisibility short",
+    " of Invisibility long",
+    " of leaping short",
+    " of leaping 2",
+    " of Leaping long",
+    " of Fire resistance short",
+    " of Fire resistance long",
+    " of Swiftness short",
+    " of Swiftness 2",
+    " of Swiftness long",
+    " of Slowness short",
+    " of Slowness 2",
+    " of Slowness long",
+    " of Water breathing short",
+    " of Water breathing long",
+    " of Instant health 1",
+    " of Instant health 2",
+    " of Instant harming 1",
+    " of Instant harming 2",
+    " of Poison short",
+    " of Poison 2",
+    " of Poison long",
+    " of Regeneration short",
+    " of Regeneration 2",
+    " of Regeneration long",
+    " of Strength short",
+    " of Strength 2",
+    " of Strength long",
+    " of Weakness short",
+    " of Weakness long",
+    " of Luck",
+    " of The Turtle master short",
+    " of The Turtle master strong",
+    " of The Turtle master long",
+    " of Slow falling short",
+    " of Slow falling long"
+];
+
+let armorObj, toolObj, otherToolObj, weaponObj, blockObj, foodObj, potionObj, arrowObj, otherObj;
+
+let inits = [initArmor, initTools, initOtherTools, initWeapons, initBlocks, initFood, initPotions, initArrows, initOther];
+
+function init() {
+    for(let i = 0; i < inits.length; i++) {
+        inits[i]();
+    }
+}
+
+function initArmor() { // armor is kinda weird, nothing is consistent about duras
+    let helmDuras = [55, 165, 77, 165, 363, 407];
+    let chestDuras = [80, 240, 112, 240, 528, 592];
+    let legDuras = [75, 225, 105, 225, 495, 555];
+    let shoeDuras = [65, 195, 91, 195, 429, 481]; // 24 total
+
+    let duras = helmDuras.concat(chestDuras, legDuras, shoeDuras);
+
+    let types = ["leather", "chain", "gold", "iron", "diamond", "netherite"];
+    let enchants = ["none", "none", "prot", "fire", "blast", "proj", "thorn"];
+    let enchantVals = [0, 0, 4, 4, 4, 4, 3];
+    let names = ["hat", "shirt", "pant", "shoe"];
+
+    enchants.concat(generalEnchants);
+    enchantVals.concat(generalEnchantVals);
+
+    armorObj = new armor_tools(1, duras, enchants, enchantVals, types, names);
+}
+
+function initTools() { // tools
+    let types = ["wood", "stone", "gold", "iron", "diamond", "netherite"];
+    let enchants = ["none", "none", "eff"];
+    let enchantVals = [0, 0, 5];
+    let names = ["axe", "pick", "shovel", "hoe"]; // 24 total
+
+    let axeDuras = [59, 131, 32, 250, 1561, 2031];
     
-    if (durable.includes(randomItem))
-      {
-        let durability = Math.floor(Math.random() * 1500) + 1;
-        document.getElementById("dura-" + i).innerHTML = durability + " durability";
-      }
-    else
-      {
-         document.getElementById("dura-" + i).innerHTML =  "Durability N/A";
-      }
+    let duras = axeDuras.concat(axeDuras, axeDuras, axeDuras);
+
+    enchants.concat(generalEnchants);
+    enchantVals.concat(generalEnchantVals);
+
+    toolObj = new armor_tools(1, duras, enchants, enchantVals, types, names);
+}
+
+function initOtherTools() { // special items
+    let names = [
+        "shield",
+        "flint+steel",
+        "trident",
+        "shears",
+        "fishing rod",
+        "carrot on stick",
+        "fungus on stick",
+        "bow",
+        "crossbow"
+    ]; // 9
+
+    let duras = [336, 64, 250, 238, 64, 64, 64, 384, 465];
+
+    let enchants = [generalEnchants, generalEnchants, [
+        "riptide",
+        "loyalty",
+        "channeling"
+    ].concat(generalEnchants), generalEnchants, [
+        "luck of the sea",
+        "lure"
+    ].concat(generalEnchants), generalEnchants, generalEnchants, [
+        "power",
+        "punch",
+        "flame",
+        "infinity"
+    ].concat(generalEnchants), [
+        "quick charge",
+        "multishot",
+        "piercing",
+    ].concat(generalEnchants)];
+
+    let enchantVals = [generalEnchantVals, generalEnchantVals, [
+        3, 3, 3
+    ].concat(generalEnchantVals), generalEnchantVals, [
+        3, 3
+    ].concat(generalEnchantVals), generalEnchantVals, generalEnchantVals, [
+        5, 2, 1, 1
+    ].concat(generalEnchantVals), [
+        3, 1, 4
+    ].concat(generalEnchantVals)];
+
+    otherToolObj = new specialEnchants(1, duras, enchants, enchantVals, [""], names);
+}
+
+function initWeapons() { // sword is... special
+    let types = ["wood", "stone", "gold", "iron", "diamond", "netherite"];
+    let enchants = ["none", "none", "fire", "sharp", "kb", "sweeping edge"];
+    let enchantVals = [0, 0, 2, 5, 2, 3];
+    let names = ["sword"]; // 6 total
+
+    let swordDuras = [59, 131, 32, 250, 1561, 2031];
     
-   
-    
-  }
+    let duras = swordDuras;
+
+    enchants.concat(generalEnchants);
+    enchantVals.concat(generalEnchantVals);
+
+    weaponObj = new armor_tools(1, duras, enchants, enchantVals, types, names);
+}
+
+function initBlocks() { // nothing special
+    let names = [
+        "obby",
+        "anvil",
+        "netherite block",
+        "e chest",
+        "end stone",
+        "cobble",
+        "redstone block",
+        "coal block",
+        "iron block",
+        "gold block",
+        "diamond block",
+        "emerald block",
+        "iron door",
+        "cobweb",
+        "oak plank",
+        "lapiz block",
+        "oak door",
+        "blue ice",
+        "crafting table",
+        "bone block",
+        "oak log",
+        "gray concrete",
+        "pumpkin",
+        "melon",
+        "sandstone",
+        "note block",
+        "white wool",
+        "gravel",
+        "clay",
+        "sponge",
+        "packed ice",
+        "magma block",
+        "soul sand",
+        "hay bale",
+        "dirt",
+        "sand",
+        "regular ice",
+        "netherrack",
+        "glass",
+        "glowstone",
+        "snow",
+        "tnt",
+        "slime block",
+        "honey block",
+        "scaffolding",
+
+        // in other places, but still same category
+        "respawn anchor",
+        "end crystal"
+    ]; // 47
+
+    blockObj = new item(64, names);
+}
+
+function initFood() { // some of them are special... so they get their own class
+    let names = [
+        "apple",
+        "bread",
+        "raw pig",
+        "cook pig",
+        "gapple",
+        "god apple",
+        "raw cod",
+        "raw salmon",
+        "tropical fish",
+        "pufferfish",
+        "cook cod",
+        "cook salmon",
+        "cookie",
+        "melon slice",
+        "dry kelp",
+        "raw cow",
+        "cook cow",
+        "raw chicken",
+        "cook chicken",
+        "rotten flesh",
+        "spider eye",
+        "carrot",
+        "potato",
+        "cook potato",
+        "golden carrot",
+        "pumpkin pie",
+        "raw rabbit",
+        "cook rabbit",
+        "raw sheep",
+        "cook sheep",
+        "chorus fruit",
+        "beetroot",
+        "sweet berry"
+    ];
+    let specialNames = [
+        "mushroom stew",
+        "cake",
+        "rabbit stew",
+        "beetroot stew",
+        "sus stew",
+        "honey bottle"
+    ]; // 39 total
+    let specialStacks = [1, 1, 1, 1, 16];
+
+    foodObj = new specialStack(64, names, specialStacks, specialNames);
+}
+
+function initPotions() {
+    potionObj = new potions(1, potionNames); // 38
+}
+
+function initArrows() {
+    let names = potionNames.concat([" Normal", " of Spectral"]); // 40
+    arrowObj = new arrows(64, names);
+}
+
+function initOther() { // random ones
+    let names = [
+        "empty bucket",
+        "milk bucket",
+        "water bucket",
+        "lava bucket",
+        "bed",
+        "horse + nothing",
+        "horse + leather armor",
+        "horse + gold armor",
+        "horse + iron armor",
+        "horse + diamond armor",
+        "mule",
+        "wolf",
+        "pig",
+        "parrot",
+        "strider",
+        "pufferfish bucket",
+        "oak boat"
+    ];
+
+    let specialNames = [
+        "snowball",
+        "pearl"
+    ]; // 19 total
+
+    let specialStacks = [
+        16, 16
+    ];
+
+    otherObj = new specialStack(1, names, specialNames, specialStacks);
+}
+
+function generateItems() {
+    for(let i = 1; i <= 10; i++) {
+        let randomChoice = Math.floor(Math.random() * 205) + 1;
+        let item;
+        if(randomChoice <= 6) {
+            item = weaponObj.randomItem();
+        } else if(randomChoice <= 15) {
+            item = otherToolObj.randomItem();
+        } else if(randomChoice <= 34) {
+            item = otherObj.randomItem();
+        } else if(randomChoice <= 58) {
+            item = armorObj.randomItem();
+        } else if(randomChoice <= 72) {
+            item = toolObj.randomItem();
+        } else if(randomChoice <= 110) {
+            item = potionObj.randomItem();
+        } else if(randomChoice <= 149) {
+            item = foodObj.randomItem();
+        } else if(randomChoice <= 189) {
+            item = arrowObj.randomItem();
+        } else {
+            item = blockObj.randomItem();
+        }
+
+        document.getElementById("name-" + i).innerHTML = item[0];
+        document.getElementById("count-" + i).innerHTML = "[x" + item[1] + "]";
+        document.getElementById("ench-" + i).innerHTML = item[2] + " " + item[3];
+        document.getElementById("dura-" + i).innerHTML = "Durability " + item[4];
+    }
 }
