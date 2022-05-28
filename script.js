@@ -11,7 +11,6 @@ window.onload = function() {init()};
 
 document.getElementById("button-gen").onclick = function() {generateItems()};
 
-
 class item {
     constructor(maxStack, names, totalCount) {
         this.maxStack = maxStack;
@@ -21,11 +20,9 @@ class item {
         this.name = "generic";
     }
 
-
     randomCount() {
         return Math.floor(Math.random() * this.maxStack) + 1;
     }
-
 
     randomName() {
         let index = Math.floor(Math.random() * this.names.length);
@@ -35,7 +32,6 @@ class item {
     random(max) {
         return Math.floor(Math.random() * max) + 1;
     }
-
 
     randomItem() {
         let nameIdx = this.randomName();
@@ -54,7 +50,6 @@ class armor_tools extends item {
 
         this.name = "armor/tools";
     }
-
 
     randomType() {
         this.typeIndex = Math.floor(Math.random() * this.types.length);
