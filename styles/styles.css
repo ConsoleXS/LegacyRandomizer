@@ -113,21 +113,23 @@ section {
     
 }
 
-a {
-    padding: 0;
-    background-color: black;
+.github {
+    font-size: 14px;
+    transition: .5s;
+    
 }
 
 
+.github:hover{
+   font-size: 18px;
+}
 
 
-
-
-/* LOCOMOTIVE SCROLL! */
+/* LOCOMOTIVE SCROLL!!!  */
 html.has-scroll-smooth {
-    overflow: hidden; 
+    overflow: hidden;
 }
-  
+    
 html.has-scroll-dragging {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -421,3 +423,25 @@ p
     grid-column: 2;
 }
 
+@media only screen and (max-width: 1400px) {
+    .hero-items {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
+  
+
+
+
+@media only screen and (max-width: 500px) {
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
+}
