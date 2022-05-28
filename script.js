@@ -12,9 +12,12 @@ window.onload = function() {init()};
 document.getElementById("button-gen").onclick = function() {generateItems()};
 
 class item {
-    constructor(maxStack, names) {
+    constructor(maxStack, names, totalCount) {
         this.maxStack = maxStack;
         this.names = names;
+        this.totalCount = totalCount;
+
+        this.name = "generic";
     }
 
     randomCount() {
@@ -38,12 +41,14 @@ class item {
 }
 
 class armor_tools extends item {
-    constructor(maxStack, duras, enchants, enchMaxes, types, names) { // types: wood, leather, gold, etc. names: shirt, sword, etc.
-        super(maxStack, names);
+    constructor(maxStack, duras, enchants, enchMaxes, types, names, totalCount) { // types: wood, leather, gold, etc. names: shirt, sword, etc.
+        super(maxStack, names, totalCount);
         this.duras = duras; // this will be an array of all the duras, separated (colon irrelevant): name1:type1, name1:type2, ...
         this.enchants = enchants;
         this.enchMaxes = enchMaxes;
         this.types = types;
+
+        this.name = "armor/tools";
     }
 
     randomType() {
@@ -69,10 +74,12 @@ class armor_tools extends item {
 }
 
 class specialEnchants extends armor_tools {
-    constructor(maxStack, duras, enchants, enchMaxes, types, names) {
-        super(maxStack, duras, enchants, enchMaxes, types, names);
+    constructor(maxStack, duras, enchants, enchMaxes, types, names, totalCount) {
+        super(maxStack, duras, enchants, enchMaxes, types, names, totalCount);
         this.enchants = enchants;
         this.enchMaxes = enchMaxes; // this and enchants should be arrays of arrays with enchants for each indiv. type
+
+        this.name = "special enchants";
     }
 
     randomEnchant(enchants, enchantMaxes) {
@@ -96,10 +103,12 @@ class specialEnchants extends armor_tools {
 }
 
 class specialStack extends item {
-    constructor(maxStack, names, specialStack, specialNames) {
-        super(maxStack, names);
+    constructor(maxStack, names, specialStack, specialNames, totalCount) {
+        super(maxStack, names, totalCount);
         this.specialStack = specialStack;
         this.specialNames = specialNames;
+
+        this.name = "special stack";
     }
 
     randomItem() {
@@ -113,19 +122,23 @@ class specialStack extends item {
 }
 
 class potions extends item {
-    constructor(maxStack, names) {
-        super(maxStack, names);
+    constructor(maxStack, names, totalCount) {
+        super(maxStack, names, totalCount);
+
+        this.name = "potions";
     }
 
     randomItem() {
         let rand = super.random(3);
-        return [rand == 1 ? "" : (rand == 2 ? "Splash" : "Lingering") + " Potion" + this.names[super.randomName()], 1, "N/A", "", "N/A"]; // Normal, splash, lingering
+        return [(rand == 1 ? "" : (rand == 2 ? "Splash" : "Lingering")) + " Potion" + this.names[super.randomName()], 1, "N/A", "", "N/A"]; // Normal, splash, lingering
     }
 }
 
 class arrows extends item { // makes it easier to concat one word
-    constructor(maxStack, names) {
-        super(maxStack, names);
+    constructor(maxStack, names, totalCount) {
+        super(maxStack, names, totalCount);
+
+        this.name = "arrows";
     }
 
     randomItem() {
@@ -181,12 +194,16 @@ let potionNames = [ // 38 total
 
 let armorObj, toolObj, otherToolObj, weaponObj, blockObj, foodObj, potionObj, arrowObj, otherObj;
 
-let inits = [initArmor, initTools, initOtherTools, initWeapons, initBlocks, initFood, initPotions, initArrows, initOther];
+let inits = [initArmor, initTools, initOtherTools, initWeirdTools, initBlocks, initFood, initPotions, initArrows, initOther];
+
+let objs;
 
 function init() {
     for(let i = 0; i < inits.length; i++) {
         inits[i]();
     }
+
+    objs = [armorObj, toolObj, otherToolObj, weaponObj, blockObj, foodObj, potionObj, arrowObj, otherObj];
 }
 
 function initArmor() { // armor is kinda weird, nothing is consistent about duras
@@ -205,7 +222,7 @@ function initArmor() { // armor is kinda weird, nothing is consistent about dura
     enchants.concat(generalEnchants);
     enchantVals.concat(generalEnchantVals);
 
-    armorObj = new armor_tools(1, duras, enchants, enchantVals, types, names);
+    armorObj = new armor_tools(1, duras, enchants, enchantVals, types, names, 24);
 }
 
 function initTools() { // tools
@@ -221,7 +238,7 @@ function initTools() { // tools
     enchants.concat(generalEnchants);
     enchantVals.concat(generalEnchantVals);
 
-    toolObj = new armor_tools(1, duras, enchants, enchantVals, types, names);
+    toolObj = new armor_tools(1, duras, enchants, enchantVals, types, names, 24);
 }
 
 function initOtherTools() { // special items
@@ -267,10 +284,10 @@ function initOtherTools() { // special items
         3, 1, 4
     ].concat(generalEnchantVals)];
 
-    otherToolObj = new specialEnchants(1, duras, enchants, enchantVals, [""], names);
+    otherToolObj = new specialEnchants(1, duras, enchants, enchantVals, [""], names, 9);
 }
 
-function initWeapons() { // sword is... special
+function initWeirdTools() { // sword and hoe are... special
     let types = ["wood", "stone", "gold", "iron", "diamond", "netherite"];
     let enchants = ["none", "none", "fire", "sharp", "kb", "sweeping edge"];
     let enchantVals = [0, 0, 2, 5, 2, 3];
@@ -283,7 +300,7 @@ function initWeapons() { // sword is... special
     enchants.concat(generalEnchants);
     enchantVals.concat(generalEnchantVals);
 
-    weaponObj = new armor_tools(1, duras, enchants, enchantVals, types, names);
+    weaponObj = new armor_tools(1, duras, enchants, enchantVals, types, names, 6);
 }
 
 function initBlocks() { // nothing special
@@ -339,7 +356,7 @@ function initBlocks() { // nothing special
         "end crystal"
     ]; // 47
 
-    blockObj = new item(64, names);
+    blockObj = new item(64, names, 47);
 }
 
 function initFood() { // some of them are special... so they get their own class
@@ -388,16 +405,16 @@ function initFood() { // some of them are special... so they get their own class
     ]; // 39 total
     let specialStacks = [1, 1, 1, 1, 16];
 
-    foodObj = new specialStack(64, names, specialStacks, specialNames);
+    foodObj = new specialStack(64, names, specialStacks, specialNames, 39);
 }
 
 function initPotions() {
-    potionObj = new potions(1, potionNames); // 38
+    potionObj = new potions(1, potionNames, 38);
 }
 
 function initArrows() {
     let names = potionNames.concat([" Normal", " of Spectral"]); // 40
-    arrowObj = new arrows(64, names);
+    arrowObj = new arrows(64, names, 40);
 }
 
 function initOther() { // random ones
@@ -430,32 +447,43 @@ function initOther() { // random ones
         16, 16
     ];
 
-    otherObj = new specialStack(1, names, specialNames, specialStacks);
+    otherObj = new specialStack(1, names, specialNames, specialStacks, 19);
 }
 
 function generateItems() {
+    let totalItems = 206;
+
+    let itemCounts = new Map(); // map the counts to their objects
+
+    let countsToPercents = new Map(); // less computations
+
+    for(let i = 0; i < objs.length; i++) { // iterate through all the gen objects
+        let obj = objs[i];
+        countsToPercents.set(obj.totalCount, obj.totalCount / totalItems);
+        itemCounts.set(obj.totalCount, obj);
+    }
+
+    let itemCountsSorted = [...itemCounts.entries()].sort((a, b) => a[0] - b[0]); // sort the counts
+
     for(let i = 1; i <= 10; i++) {
-        let randomChoice = Math.floor(Math.random() * 205) + 1;
+        let randomChoice = Math.random();
         let item;
-        if(randomChoice <= 6) {
-            item = weaponObj.randomItem();
-        } else if(randomChoice <= 15) {
-            item = otherToolObj.randomItem();
-        } else if(randomChoice <= 34) {
-            item = otherObj.randomItem();
-        } else if(randomChoice <= 58) {
-            item = armorObj.randomItem();
-        } else if(randomChoice <= 72) {
-            item = toolObj.randomItem();
-        } else if(randomChoice <= 110) {
-            item = potionObj.randomItem();
-        } else if(randomChoice <= 149) {
-            item = foodObj.randomItem();
-        } else if(randomChoice <= 189) {
-            item = arrowObj.randomItem();
-        } else {
-            item = blockObj.randomItem();
+        
+        let object;
+
+        let currentPercent = 0;
+        for(let [count, obj] of itemCountsSorted) {
+            let perc = countsToPercents.get(count);
+
+            if(randomChoice < countsToPercents.get(count) + currentPercent) {
+                item = obj.randomItem();
+                object = obj;
+                break;
+            }
+            currentPercent += perc;
         }
+
+        console.log("name: " + item[0] + " , i = " + i + " , obj = " + object.name);
 
         document.getElementById("name-" + i).innerHTML = item[0];
         document.getElementById("count-" + i).innerHTML = "[x" + item[1] + "]";
