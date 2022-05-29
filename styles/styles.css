@@ -39,6 +39,8 @@ h1
     letter-spacing: .07em;
     color: #fcfcfc;
     grid-column: 1;
+    opacity: 0;
+
 }
 
 .legacy {
@@ -57,6 +59,7 @@ p {
     letter-spacing: 1.5px;
     color: var(--secondary-text-color);
     font-size: 1.5em;
+    
 }
 
 .curve{
@@ -65,7 +68,8 @@ p {
 }
 
 .arrow {
-    margin-left: 4.5em;
+    margin: auto;
+    margin-top: 100px;
     box-sizing: border-box;
     height: 3.5vw;
     width: 3.5vw;
@@ -216,6 +220,9 @@ html.has-scroll-dragging {
     font-size: 1.5em;
 }
 
+#authors {
+    opacity: 0;    
+}
 
 
 .container {

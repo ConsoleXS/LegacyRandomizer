@@ -13,25 +13,29 @@
     <br>
     <div data-scroll-section class="hero">
         <br>
+        <br>
+        <br>
         <h1 data-scroll data-scroll-speed="2.1" data-scroll-delay=".1">LEGACY</h1>
         <h1 class="legacy" data-scroll data-scroll-speed="2" data-scroll-delay=".2">KIT</h1>
         <h1 class="line" data-scroll data-scroll-speed="2" data-scroll-delay=".1">
             <span>R</span><span>A</span><span>N</span><span>D</span><span>O</span><span>M</span><span>I</span><span>Z</span><span>E</span><span>R</span>
         </h1>
-        <p data-scroll data-scroll-speed="3" class="authors">AbsFavorite | ConsoleX | Franki | PinchPlayz </p>
+        <p data-scroll data-scroll-speed="3" class="authors" id="authors">AbsFavorite | ConsoleX | Franki | PinchPlayz </p>
         <br>
         <div class="hero-items">
-            <img src="./images/apple.png" alt="apple" style="width: 9em;" class="apple" data-scroll data-scroll-speed="2.5" data-scroll-delay=".2">
-            <img src="./images/diamond_sword.png" alt="diamond_sword" style="width: 9em;" class="diamond_sword" data-scroll data-scroll-speed="2.1" data-scroll-delay=".25">
-            <img src="./images/golden_carrot.png" alt="golden_carrot" style="width: 9em;" class="golden_carrot" data-scroll data-scroll-speed="1.9" data-scroll-delay=".27">
-            <img src="./images/chest_minecart.png" alt="chest_minecart" style="width: 9em;" class="chest_minecart" data-scroll data-scroll-speed="5" data-scroll-delay=".29">
-            <img src="./images/trident.png" alt="trident" style="width: 9em;" class="trident" data-scroll data-scroll-speed="3" data-scroll-delay=".3">
+            <img src="./images/apple.png" alt="apple" style="width: 9em;" class="apple" data-scroll data-scroll-speed="2.5" data-scroll-delay=".2" id="hero-item">
+            <img src="./images/diamond_sword.png" alt="diamond_sword" style="width: 9em;" class="diamond_sword" data-scroll data-scroll-speed="2.1" data-scroll-delay=".25" id="hero-item">
+            <img src="./images/golden_carrot.png" alt="golden_carrot" style="width: 9em;" class="golden_carrot" data-scroll data-scroll-speed="1.9" data-scroll-delay=".27" id="hero-item">
+            <img src="./images/chest_minecart.png" alt="chest_minecart" style="width: 9em;" class="chest_minecart" data-scroll data-scroll-speed="5" data-scroll-delay=".29" id="hero-item">
+            <img src="./images/trident.png" alt="trident" style="width: 9em;" class="trident" data-scroll data-scroll-speed="3" data-scroll-delay=".3" id="hero-item">
         </div>
        
 
        
-        <div class="arrow" style="cursor: pointer;" onclick="scrollToBottom()"></div>
-      
+    </div>
+
+    <div data-scroll-section class="t">
+        <div class="arrow" style="cursor: pointer;" onclick="scrollToBottom()" ></div>
     </div>
 
     
@@ -156,7 +160,7 @@
 
     
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="./js/script.js"></script>
@@ -167,8 +171,43 @@
         })
         const target = document.querySelector('#full');
 
+        var tl = anime.timeline({
+            easing: 'easeInOutExpo',
+            duration: 750
+        });
+
+        function getRandomInt()
+        {
+            return 10
+        }
+
+        tl
+        .add({
+            targets: 'h1',
+            opacity: 1,
+            translateX: 40,
+            duration: 1000, 
+            delay: anime.stagger(100),
+           
+        })
+        .add({
+            targets: '#authors',
+            opacity: 1,
+            translateX: 40,
+            duration: 1000, 
+            delay: anime.stagger(100),
+        }, 330)
+        .add({
+            targets: '#hero-item',
+            opacity: 1,
+            rotate: 50,
+            duration: 1000, 
+            delay: anime.stagger(100),
+        }, 390)
+        
 
 
+      
         function scrollToBottom()
         {
             scroll.scrollTo(target);
