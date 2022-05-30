@@ -1,18 +1,54 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Kit Randomizer</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Randomizer - ConsoleX</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body data-scroll-container>
+    <br>
+    <br>
+    <br>
+    <div data-scroll-section class="hero">
+        <br>
+        <br>
+        <br>
+        <h1 data-scroll data-scroll-speed="2.1" data-scroll-delay=".1">LEGACY</h1>
+        <h1 class="legacy" data-scroll data-scroll-speed="2" data-scroll-delay=".2">KIT</h1>
+        <h1 class="line" data-scroll data-scroll-speed="2" data-scroll-delay=".1">
+            <span>R</span><span>A</span><span>N</span><span>D</span><span>O</span><span>M</span><span>I</span><span>Z</span><span>E</span><span>R</span>
+        </h1>
+        <p data-scroll data-scroll-speed="3" class="authors" id="authors">AbsFavorite | ConsoleX | Franki | PinchPlayz </p>
+        <br>
+        <div class="hero-items">
+            <img src="./images/apple.png" alt="apple" style="width: 9em;" class="apple" data-scroll data-scroll-speed="2.5" data-scroll-delay=".2" id="hero-item">
+            <img src="./images/diamond_sword.png" alt="diamond_sword" style="width: 9em;" class="diamond_sword" data-scroll data-scroll-speed="2.1" data-scroll-delay=".25" id="hero-item">
+            <img src="./images/golden_carrot.png" alt="golden_carrot" style="width: 9em;" class="golden_carrot" data-scroll data-scroll-speed="1.9" data-scroll-delay=".27" id="hero-item">
+            <img src="./images/chest_minecart.png" alt="chest_minecart" style="width: 9em;" class="chest_minecart" data-scroll data-scroll-speed="5" data-scroll-delay=".29" id="hero-item">
+            <img src="./images/trident.png" alt="trident" style="width: 9em;" class="trident" data-scroll data-scroll-speed="3" data-scroll-delay=".3" id="hero-item">
+        </div>
+       
 
-    <body>
-    <!-- partial:index.partial.html -->
-        <body>
-            <h1>Legacy Kit Randomizer</h1>
+       
+    </div>
+
+    <div data-scroll-section class="t">
+        <div class="arrow" style="cursor: pointer;" onclick="scrollToBottom()" ></div>
+    </div>
+
+    
+   
+    <div data-scroll data-scroll-section><svg style="display: block;" class="curve" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path d="M0,160L40,176C80,192,160,224,240,229.3C320,235,400,213,480,197.3C560,181,640,171,720,154.7C800,139,880,117,960,144C1040,171,1120,245,1200,266.7C1280,288,1360,256,1400,240L1440,224L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z" fill="currentColor" fill-opacity="1"></path></svg></div>
+    
+    <section class="randomizer" data-scroll-section>
+        <div class="test" id="full">
             <br>
-
-            <div class="container">
+            <br>
+            <br>
+            <div class="container" data-scroll data-scroll-speed="6">
+                
                 <div class="item" id="item-1">
                     <p class="item-name" id="name-1">
                         Item Name
@@ -107,10 +143,80 @@
                 <button class="button-gen" id="button-gen">Generate</button>      
                 </div>
             </div>
-        </body>
+            
+            
 
-        <!-- partial -->
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-        <script src="./script.js"></script>
-    </body>
+        </div>
+    </section>
+        
+
+    <a href="https://github.com/ConsoleXS/LegacyRanomizer" style="position:fixed;bottom:0%;right:5px;margin:0;padding:5px 3px;">
+        <button type="button" class="btn" style="background: #3d3737; border: none;">
+            <ion-icon name="logo-github" style="font-size: 30px;"></ion-icon>
+          <p class="github">Github</p>
+        </button>
+    </a>
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+        const scroll = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]"),
+        smooth: true 
+        })
+        const target = document.querySelector('#full');
+
+        var tl = anime.timeline({
+            easing: 'easeInOutExpo',
+            duration: 750
+        });
+
+        function getRandomInt()
+        {
+            return 10
+        }
+
+        tl
+        .add({
+            targets: 'h1',
+            opacity: 1,
+            translateX: 40,
+            duration: 1000, 
+            delay: anime.stagger(100),
+           
+        })
+        .add({
+            targets: '#authors',
+            opacity: 1,
+            translateX: 40,
+            duration: 1000, 
+            delay: anime.stagger(100),
+        }, 330)
+        .add({
+            targets: '#hero-item',
+            opacity: 1,
+            rotate: 50,
+            duration: 1000, 
+            delay: anime.stagger(100),
+        }, 390)
+        
+
+
+      
+        function scrollToBottom()
+        {
+            scroll.scrollTo(target);
+        }
+
+       
+
+    </script>
+</body>
+    
+   
 </html>
