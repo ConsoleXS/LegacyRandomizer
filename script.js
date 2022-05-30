@@ -410,12 +410,12 @@ function initFood() { // some of them are special... so they get their own class
 }
 
 function initPotions() {
-    potionObj = new potions(1, potionNames, 38);
+    potionObj = new potions(1, potionNames, 3);
 }
 
 function initArrows() {
     let names = potionNames.concat([" Normal", " of Spectral"]); // 40
-    arrowObj = new arrows(64, names, 40);
+    arrowObj = new arrows(64, names, 4);
 }
 
 function initOther() { // random ones
