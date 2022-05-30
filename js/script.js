@@ -96,9 +96,6 @@ class specialEnchants extends armor_tools {
         let type = this.types[typeIdx];
         let dura = super.random(this.duras[typeIdx]);
 
-        console.log(enchant);
-        console.log(this.enchants[nameIdx]);
-        console.log(this.enchMaxes[nameIdx]);
         return [type + name, 1, enchant[0], enchant[0] == "none" ? "" : enchant[1], dura];
     }
 }
@@ -452,7 +449,7 @@ function initOther() { // random ones
 }
 
 function generateItems() {
-    let totalItems = 206;
+    let totalItems = 135;
 
     let itemCounts = new Map(); // map the counts to their objects
 
@@ -476,7 +473,7 @@ function generateItems() {
         for(let [count, obj] of itemCountsSorted) {
             let perc = countsToPercents.get(count);
 
-            if(randomChoice < countsToPercents.get(count) + currentPercent) {
+            if(randomChoice < (countsToPercents.get(count) + currentPercent)) {
                 item = obj.randomItem();
                 object = obj;
                 break;
@@ -484,7 +481,9 @@ function generateItems() {
             currentPercent += perc;
         }
 
-        console.log("name: " + item[0] + " , i = " + i + " , obj = " + object.name);
+        if(item === undefined) {
+            console.log("error: item not found");
+        }
 
         document.getElementById("name-" + i).innerHTML = item[0];
         document.getElementById("count-" + i).innerHTML = "[x" + item[1] + "]";
