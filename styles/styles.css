@@ -467,6 +467,9 @@ p
     .authors {
         font-size: 1em;
     }
+    .arrow {
+        margin-bottom: 100px;
+    }
     
     
 }
