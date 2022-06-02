@@ -446,9 +446,58 @@ p
 
 
 
+@media only screen and (max-width: 900px) {
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+        height: 200vh;
+    }
+
+    .transition {
+        display: none;
+    }
+
+    h1 {
+        font-size: 7em;
+    }
+
+    .legacy {
+        font-size: 7em;
+    }
+    
+    .authors {
+        font-size: 1em;
+    }
+    
+    
+}
+
+
+
 @media only screen and (max-width: 500px) {
     .container {
         grid-template-columns: repeat(1, 1fr);
+        height: 200vh;
     }
+
+    .transition {
+        display: none;
+    }
+
+    h1 {
+        font-size: 4em;
+        margin-left: -5%;
+    }
+
+    .legacy {
+        font-size: 4em;
+        -webkit-text-stroke: .5px lightskyblue;
+        margin-left: -5%;
+    }
+    
+    .authors {
+        font-size: 1em;
+        margin-left: -9%;
+    }
+    
     
 }
